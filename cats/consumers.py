@@ -1,47 +1,39 @@
-from channels.generic.websocket import AsyncWebsocketConsumer
 import json
+from channels.generic.websocket import AsyncWebsocketConsumer
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        self.room_name = 'chat_room'
-        self.room_group_name = f'chat_{self.room_name}'
-
-        # Присоединяемся к группе чата
-        await self.channel_layer.group_add(
-            self.room_group_name,
-            self.channel_name
-        )
-
-        await self.accept()
+            # Присоединяемся к группе "chat"
+            await self.channel_layer.group_add("chat_group", self.channel_name)
+            await self.accept()
 
     async def disconnect(self, close_code):
-        # Отключаемся от группы чата
-        await self.channel_layer.group_discard(
-            self.room_group_name,
-            self.channel_name
-        )
+        # Удаляемся из группы "chat"
+        await self.channel_layer.group_discard("chat_group", self.channel_name)
 
-    async def receive(self, text_data=None, bytes_data=None):
-        text_data_json = json.loads(text_data)
-        message = text_data_json['message']
-        user = self.scope['user']
 
-        username = user.username if user.is_authenticated else 'Гость'
+    async def receive(self, text_data):
+        # Получаем данные от клиента
+        data = json.loads(text_data)
+        user = data['user']  # Получаем пользователя из данных
+        message = data['content']  # Получаем сообщение
 
+        # Отправляем сообщение обратно в группу "chat"
         await self.channel_layer.group_send(
-            self.room_group_name,
+            "chat_group",
             {
                 'type': 'chat_message',
                 'message': message,
-                'username': username
+                'user': user
             }
         )
 
     async def chat_message(self, event):
+        # Отправляем сообщение обратно клиенту
         message = event['message']
-        username = event['username']
+        user = event['user']
 
         await self.send(text_data=json.dumps({
-            'message': message,
-            'username': username
+            'user': user,
+            'message': message
         }))

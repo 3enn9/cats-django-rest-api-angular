@@ -1,0 +1,52 @@
+h2 {
+    font-size: 28px;
+    color: #343a40;
+    margin-bottom: 20px;
+    text-align: center; /* Центрируем заголовок */
+  }
+  
+  h3 {
+    font-size: 24px;
+    color: #495057;
+    margin: 10px 0; /* Отступы вокруг названия кота */
+    text-align: center; /* Центрируем название кота */
+  }
+  
+  div {
+    max-width: 500px;
+    margin: 0 auto; /* Центрируем контейнер */
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: left; /* Выровненные элементы по левому краю */
+  }
+  
+  p {
+    font-size: 18px;
+    color: #495057;
+    margin: 5px 0; /* Отступы между параграфами */
+  }
+  
+  button {
+    display: inline-block;
+    margin: 10px 5px; /* Отступы между кнопками */
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  button:disabled {
+    background-color: #d6d6d6; /* Цвет для отключенной кнопки */
+    cursor: not-allowed; /* Изменяем курсор для отключенной кнопки */
+  }
+  

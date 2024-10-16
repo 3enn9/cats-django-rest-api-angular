@@ -1,0 +1,64 @@
+form {
+    max-width: 600px; /* Максимальная ширина формы */
+    margin: 20px auto; /* Центрируем форму */
+    padding: 20px;
+    background-color: #f8f9fa; /* Светлый фон для формы */
+    border-radius: 10px; /* Закругленные углы */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Тень для формы */
+  }
+  
+  h2 {
+    text-align: center; /* Центрируем заголовок */
+    font-size: 28px; /* Размер шрифта заголовка */
+    color: #343a40; /* Цвет заголовка */
+    margin-bottom: 20px; /* Отступ снизу */
+  }
+  
+  div {
+    margin-bottom: 15px; /* Отступ между полями ввода */
+  }
+  
+  label {
+    display: block; /* Блоковое отображение для меток */
+    font-size: 16px; /* Размер шрифта метки */
+    color: #495057; /* Цвет метки */
+    margin-bottom: 5px; /* Отступ снизу для меток */
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  input[type="checkbox"] {
+    width: 100%; /* Ширина полей ввода */
+    padding: 10px; /* Отступы внутри полей */
+    border: 1px solid #ced4da; /* Цвет границы */
+    border-radius: 5px; /* Закругленные углы для полей */
+  }
+  
+  input[type="checkbox"] {
+    width: auto; /* Убираем 100% ширины для чекбокса */
+  }
+  
+  button {
+    display: block; /* Блоковое отображение для кнопки */
+    width: 100%; /* Ширина кнопки */
+    padding: 10px; /* Отступы внутри кнопки */
+    font-size: 16px; /* Размер шрифта кнопки */
+    background-color: #007bff; /* Цвет фона кнопки */
+    color: white; /* Цвет текста кнопки */
+    border: none; /* Без границы */
+    border-radius: 5px; /* Закругленные углы для кнопки */
+    cursor: pointer; /* Курсор при наведении на кнопку */
+    transition: background-color 0.3s ease; /* Плавный переход для фона */
+  }
+  
+  button:hover {
+    background-color: #0056b3; /* Цвет кнопки при наведении */
+  }
+  
+  p {
+    text-align: center; /* Центрируем текст для уведомления о входе */
+    font-size: 18px; /* Размер шрифта текста */
+    color: #dc3545; /* Цвет текста для ошибки */
+    margin: 20px 0; /* Отступы сверху и снизу */
+  }
+  

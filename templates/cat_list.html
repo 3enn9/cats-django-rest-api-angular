@@ -4,62 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ваши коты</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            color: #333;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            background: #fff;
-            margin: 10px 0;
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        a {
-            text-decoration: none;
-            color: #007BFF;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .chat-button {
-            display: inline-block;
-            padding: 10px 20px;
-            margin-top: 20px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            text-align: center;
-            text-decoration: none;
-        }
-        .chat-button:hover {
-            background-color: #0056b3;
-        }
-    </style>
 </head>
 <body>
     <h1>Ваши коты</h1>
-    <ul>
-        {% for cat in cats %}
-            <li>
-                {{ cat.name }} -
-                <a href="{% url 'cat_edit' cat.pk %}">Редактировать</a> -
-                <a href="{% url 'cat_delete' cat.pk %}">Удалить</a>
-            </li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'cat_add' %}">Добавить кота</a>
-    <a href="{% url 'chat' %}" class="chat-button">Перейти в чат с котоводами</a>
+    <ul id="cats-list"></ul>
+
+    <button id="load-cats">Загрузить котов</button>
+
+    <script>
+        function getCats() {
+            fetch('/api/cats/', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); // Для теста выводим данные в консоль
+                const catList = document.getElementById('cats-list');
+                catList.innerHTML = '';
+                data.forEach(cat => {
+                    const li = document.createElement('li');
+                    li.textContent = cat.name;
+                    catList.appendChild(li);
+                });
+            });
+        }
+
+        document.getElementById('load-cats').addEventListener('click', getCats);
+    </script>
 </body>
 </html>

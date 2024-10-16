@@ -1,0 +1,12 @@
+<hr>
+<h4 *ngIf="user != null">Hello {{ user.username }}</h4>
+<hr>
+<button *ngIf="user != null" class="button-margin" routerLink="add-cat">Добавить кота</button>
+<button *ngIf="user != null" class="button-margin" routerLink="chat">Чат</button>
+<div *ngFor="let cat of categoryes">
+  <h3><a [routerLink]="['cat', cat.id]">{{ cat.name }}</a></h3> <!-- Ссылка на детали кота -->
+  <p>Порода: {{ cat.breed }}</p>
+  <p>Возраст: {{ cat.age }} лет</p>
+  <p>Шерстистый: {{ cat.is_furry ? 'Да' : 'Нет' }}</p>
+  <hr>
+</div>

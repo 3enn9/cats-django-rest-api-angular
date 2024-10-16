@@ -1,0 +1,10 @@
+<h2>Детали кота</h2>
+<div *ngIf="cat">
+  <h3>{{ cat?.name }}</h3>
+  <p>Порода: {{ cat?.breed }}</p>
+  <p>Возраст: {{ cat?.age }} лет</p>
+  <p>Шерстистый: {{ cat?.is_furry ? 'Да' : 'Нет' }}</p>
+
+  <button (click)="deleteCat()">Удалить кота</button>
+  <button [routerLink]="['/edit-cat', cat?.id]">Редактировать кота</button>
+</div>

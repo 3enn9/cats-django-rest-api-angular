@@ -1,14 +1,19 @@
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from cats import views
+from rest_framework.routers import DefaultRouter
+# from cats.views import CatViewSet, RegisterView, chat_view, LoginView, LogoutView
+from cats.views import MessageListView, CatViewSet
+
+# Создаем маршрутизатор и регистрируем CatViewSet
+router = DefaultRouter()
+router.register(r'cats', CatViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    # path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/', include('cats.urls')),  # Подключаем API котов
-    path('ws/chat/', views.chat_view, name='chat'),
-    path('login/', views.login_view, name='login'),
-    path('register/', views.register_view, name='register'),
+    path('api/', include(router.urls)),  # Подключаем маршруты из router
+    path('api/v1/user/', include('user.urls')),
+    path('api/v1/auth/', include('djoser.urls')),
+    path('api/v1/auth-token/', include('djoser.urls.authtoken')),
+    path('api/messages/', MessageListView.as_view(), name='message_list')
+    # path('ws/chat/', chat_view, name='chat'),  # Веб-сокеты для чата
 ]

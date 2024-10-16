@@ -1,6 +1,8 @@
 from django.contrib import admin
+from cats.models import Cat, Message
 
-from cats.models import Cat
-
-# Register your models here.
+# Регистрация модели Cat
 admin.site.register(Cat)
+
+# Регистрация модели Message
+admin.site.register(Message)

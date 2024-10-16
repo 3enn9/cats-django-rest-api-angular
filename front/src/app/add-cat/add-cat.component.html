@@ -1,0 +1,26 @@
+<div *ngIf="isUserAuthenticated; else loginPrompt">
+    <form [formGroup]="addCatForm" (ngSubmit)="submitCatData()">
+      <div>
+        <label for="name">Имя кота:</label>
+        <input id="name" formControlName="name" required />
+      </div>
+      <div>
+        <label for="breed">Порода кота:</label>
+        <input id="breed" formControlName="breed" required />
+      </div>
+      <div>
+        <label for="age">Возраст кота:</label>
+        <input id="age" type="number" formControlName="age" required />
+      </div>
+      <div>
+        <label for="is_furry">Пушистый:</label>
+        <input id="is_furry" type="checkbox" formControlName="is_furry" />
+      </div>
+      <button type="submit">Добавить кота</button>
+    </form>
+  </div>
+  
+  <ng-template #loginPrompt>
+    <p>Пожалуйста, войдите в систему, чтобы добавить кота.</p>
+  </ng-template>
+  

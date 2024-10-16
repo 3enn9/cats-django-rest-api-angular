@@ -1,0 +1,20 @@
+<h2>Редактировать кота</h2>
+<form (ngSubmit)="updateCat()">
+  <div>
+    <label>Имя:</label>
+    <input [(ngModel)]="cat.name" name="name" required>
+  </div>
+  <div>
+    <label>Порода:</label>
+    <input [(ngModel)]="cat.breed" name="breed" required>
+  </div>
+  <div>
+    <label>Возраст:</label>
+    <input [(ngModel)]="cat.age" type="number" name="age" required>
+  </div>
+  <div>
+    <label>Шерстистый:</label>
+    <input [(ngModel)]="cat.is_furry" type="checkbox" name="is_furry">
+  </div>
+  <button type="submit">Сохранить изменения</button>
+</form>
