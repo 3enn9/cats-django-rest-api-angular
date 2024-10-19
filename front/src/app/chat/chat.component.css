@@ -1,50 +1,64 @@
-.chat-window {
-  max-width: 600px; /* Максимальная ширина окна чата */
-  height: 400px; /* Высота окна чата */
-  border: 1px solid #ced4da; /* Граница окна */
-  border-radius: 10px; /* Закругленные углы окна */
-  overflow-y: auto; /* Прокрутка по вертикали */
-  background-color: #f8f9fa; /* Светлый фон для окна чата */
-  padding: 20px; /* Внутренние отступы */
-  margin: 20px auto; /* Центрирование окна чата */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Тень для окна чата */
+/* Стили для кнопок */
+.button-margin {
+  margin-right: 10px; /* Отступ между кнопками */
+  padding: 10px 15px; /* Внутренние отступы */
+  background-color: #4CAF50; /* Цвет фона */
+  color: white; /* Цвет текста */
+  border: none; /* Убираем рамку */
+  border-radius: 5px; /* Скругление углов */
+  cursor: pointer; /* Указатель для курсора */
+  transition: background-color 0.3s; /* Плавный переход цвета фона */
 }
 
+.button-margin:hover {
+  background-color: #45a049; /* Цвет при наведении */
+}
+
+/* Окно чата */
+.chat-window {
+  border: 1px solid #ccc; /* Рамка вокруг окна */
+  border-radius: 5px; /* Скругление углов */
+  max-height: 400px; /* Максимальная высота окна */
+  overflow-y: auto; /* Прокрутка по вертикали */
+  padding: 10px; /* Внутренние отступы */
+  background-color: #f9f9f9; /* Цвет фона */
+  margin-bottom: 10px; /* Отступ снизу */
+}
+
+/* Сообщения */
 .message {
-  margin-bottom: 10px; /* Отступы между сообщениями */
-  padding: 10px; /* Внутренние отступы для сообщений */
-  border-radius: 5px; /* Закругленные углы для сообщений */
-  background-color: #e9ecef; /* Светлый фон для сообщений */
+  padding: 8px; /* Внутренние отступы для сообщений */
+  margin-bottom: 5px; /* Отступ между сообщениями */
+  border-radius: 5px; /* Скругление углов сообщений */
 }
 
 .message strong {
-  color: #007bff; /* Цвет имени пользователя */
+  color: #333; /* Цвет для имени пользователя */
 }
 
+/* Поля ввода */
 .chat-input {
-  display: flex; /* Используем flexbox для размещения ввода и кнопки */
-  max-width: 600px; /* Максимальная ширина поля ввода */
-  margin: 0 auto; /* Центрирование поля ввода */
+  display: flex; /* Используем flexbox для расположения элементов */
 }
 
-input {
-  flex: 1; /* Поле ввода занимает оставшееся пространство */
-  padding: 10px; /* Внутренние отступы для поля ввода */
-  border: 1px solid #ced4da; /* Цвет границы поля ввода */
-  border-radius: 5px; /* Закругленные углы для поля ввода */
-  margin-right: 10px; /* Отступ между полем ввода и кнопкой */
+.chat-input input {
+  flex: 1; /* Поле ввода занимает доступное пространство */
+  padding: 10px; /* Внутренние отступы */
+  border: 1px solid #ccc; /* Рамка */
+  border-radius: 5px; /* Скругление углов */
+  margin-right: 5px; /* Отступ справа */
 }
 
-button {
-  padding: 10px 15px; /* Внутренние отступы для кнопки */
-  background-color: #007bff; /* Цвет фона кнопки */
-  color: white; /* Цвет текста кнопки */
-  border: none; /* Без границы */
-  border-radius: 5px; /* Закругленные углы для кнопки */
-  cursor: pointer; /* Курсор при наведении на кнопку */
-  transition: background-color 0.3s ease; /* Плавный переход для фона */
+.chat-input button {
+  padding: 10px 15px; /* Внутренние отступы */
+  background-color: #007BFF; /* Цвет фона */
+  color: white; /* Цвет текста */
+  border: none; /* Убираем рамку */
+  border-radius: 5px; /* Скругление углов */
+  cursor: pointer; /* Указатель для курсора */
+  transition: background-color 0.3s; /* Плавный переход цвета фона */
 }
 
-button:hover {
-  background-color: #0056b3; /* Цвет кнопки при наведении */
+.chat-input button:hover {
+  background-color: #0056b3; /* Цвет при наведении */
 }

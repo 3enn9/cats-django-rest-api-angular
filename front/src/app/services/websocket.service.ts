@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { WebSocketSubject } from 'rxjs/webSocket';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ export class WebsocketService {
   private ws: WebSocketSubject<any>;
 
   constructor() { 
-    this.ws = new WebSocketSubject('ws://localhost:8000/ws/chat/');
+    this.ws = new WebSocketSubject(environment.websocketUrl)
+
   }
 
   // Отправка сообщения на WebSocket сервер

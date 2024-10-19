@@ -1,3 +1,4 @@
+<button *ngIf="user != null" class="button-margin" routerLink="">Главная</button>
 <div class="chat-window">
   <div *ngFor="let msg of messages" class="message">
     <strong>{{ msg.user }}:</strong> {{ msg.message }}

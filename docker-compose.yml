@@ -1,22 +1,40 @@
 version: '3.8'
 
 services:
-  web:
-    build: .
-    command: daphne -b 0.0.0.0 -p 8000 myproject.asgi:application  # Daphne для запуска ASGI-приложения
+  django:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: daphne -b 0.0.0.0 -p 8000 myproject.asgi:application
+    volumes:
+      - .:/app
     ports:
       - "8000:8000"
-    volumes:
-      - .:/app  # Монтируем текущую директорию внутрь контейнера
-    environment:
-      - PYTHONUNBUFFERED=1
     depends_on:
-      - redis  # Для WebSocket можно использовать Redis
+      - redis
+    environment:
+      - PYTHONPATH=/app/myproject
+    networks:
+      - webnet
+
+  angular:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    volumes:
+      - ./front:/usr/src/app
+    ports:
+      - "4200:4200"
+    command: npm start
+    networks:
+      - webnet
 
   redis:
-    image: "redis:alpine"  # Redis для обработки каналов WebSocket
-    volumes:
-      - redis_data:/data  # Храним данные Redis
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+    networks:
+      - webnet
 
-volumes:
-  redis_data:  # Тома для хранения данных Redis
+networks:
+  webnet:
