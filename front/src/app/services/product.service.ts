@@ -20,7 +20,7 @@ export class ProductService {
       'Authorization': `Token ${token}`
     });
 
-    return this.http.get(this.baseurl + 'api/cats', { headers });
+    return this.http.get(this.baseurl + 'api/cats/', { headers });
   }
 
   addCat(name: string, breed: string, age: number, is_furry: boolean): Observable<any> {
