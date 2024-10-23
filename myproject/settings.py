@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-$fqn@ez&l$=%*u74p&f4h2q)&!=)nzmww&u5p8ucw$wk=y0o*9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -43,21 +43,18 @@ INSTALLED_APPS = [
     'djoser',
     'user',
     'channels',  # для поддержки WebSockets
-    'cats',  # наше приложение с котами
-    'chat',
+    'cats',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'myproject.urls'
@@ -159,4 +156,4 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'  # Измените на нужный URL после входа
 LOGOUT_REDIRECT_URL = 'login'  # URL, на который будет перенаправлено после выхода
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ALL_ORIGINS = True

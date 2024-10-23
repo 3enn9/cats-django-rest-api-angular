@@ -1,11 +1,18 @@
-<button *ngIf="user != null" class="button-margin" routerLink="">Главная</button>
-<div class="chat-window">
-  <div *ngFor="let msg of messages" class="message">
-    <strong>{{ msg.user }}:</strong> {{ msg.message }}
+<div class="chat-container">
+  <!-- Секция для отображения сообщений -->
+  <div class="messages-container">
+    <div *ngFor="let msg of messages" class="message">
+      <strong>{{ msg.user }}</strong>: {{ msg.message }}
+    </div>
   </div>
-</div>
 
-<div class="chat-input">
-  <input [(ngModel)]="message" placeholder="Введите сообщение..." />
-  <button (click)="sendMessage(message)">Отправить</button>
+  <!-- Поле ввода и кнопка для отправки сообщений -->
+  <div class="input-container">
+    <input
+      type="text"
+      [(ngModel)]="message"
+      placeholder="Введите сообщение..."
+      (keydown.enter)="sendMessage(message)" />
+    <button (click)="sendMessage(message)">Отправить</button>
+  </div>
 </div>

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { RouterModule } from '@angular/router';
+import { ChatService } from '../services/chat.service';
 
 
 
@@ -19,7 +20,11 @@ export class ChatComponent {
   message: string = '';
   user: any; 
 
-  constructor(private websocketService: WebsocketService, private user_token: UserService) { }
+  constructor(
+    private websocketService: WebsocketService,
+    private user_token: UserService,
+    private chatService: ChatService 
+  ) { }
 
   ngOnInit(): void {
     const token = localStorage.getItem('auth-token');
@@ -31,35 +36,42 @@ export class ChatComponent {
     }
 
     // Загружаем сообщения из localStorage
-    this.loadMessagesFromLocalStorage();
+    this.loadMessagesFromDatabase();
 
 
     // Подписка на сообщения
     this.websocketService.getMessages().subscribe((data) => {
       // Обработка полученных данных
       this.messages.push(data); // Добавляем новое сообщение в массив
-      this.saveMessagesToLocalStorage();
     });
   }
 
   sendMessage(message: string) {
     if (this.user && message.trim()) { // Проверяем, что объект пользователя доступен
       this.websocketService.sendMessage(this.user.username, message); // Отправляем пользователя и сообщение
-      this.saveMessagesToLocalStorage(); // Сохраняем в localStorage
-      this.message = ''
+      // Сохраняем сообщение в базу данных через сервис
+      this.chatService.saveMessage({ message: message }).subscribe(
+        (response) => {
+          console.log('Сообщение сохранено в базе данных', response);
+        },
+        (error) => {
+          console.error('Ошибка при сохранении сообщения', error);
+        }
+      );
+      this.message = ''; // Очищаем поле ввода
     } else {
       console.error('Пользователь не загружен');
     }
   }
 
-  private saveMessagesToLocalStorage() {
-    localStorage.setItem('chatMessages', JSON.stringify(this.messages));
-  }
-
-  private loadMessagesFromLocalStorage() {
-    const savedMessages = localStorage.getItem('chatMessages');
-    if (savedMessages) {
-      this.messages = JSON.parse(savedMessages);
-    }
+  private loadMessagesFromDatabase() {
+    this.chatService.getMessages().subscribe(
+      (messages) => {
+        this.messages = messages; // Присваиваем сообщения из базы данных
+      },
+      (error) => {
+        console.error('Ошибка при загрузке сообщений из базы данных', error);
+      }
+    );
   }
 } 
